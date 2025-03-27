@@ -4,17 +4,17 @@ import React, {useState} from "react";
 const UsersDataList = () => {
     const [usersList, setUsersList] = useState([]);    
 
-    const fetchUsers = () => {
+    const fetchUsers = async () => {
         // Fetch users from backend
         try {
-            const response = axios.get('http://localhost/api/users/', {
+            const response = await axios.get('http://localhost/api/users/', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
 
             if (response) {
-                setUsersList(response)
+                setUsersList(response.data)
             }
         } catch (error) {
             alert('Impossible to fetch data')

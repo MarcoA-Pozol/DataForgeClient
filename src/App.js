@@ -6,9 +6,10 @@ import RefreshAccessTokenModule from './components/Authentication/JWTManagement/
 function App() {
   return (
     <div className="App">
-      <RefreshAccessTokenModule/>
-      <LoginView username='JuanMartinez' password='juanmartinez'/>
+      <h1>Hola, este es un login</h1>
+      <LoginView/>
       <UsersDataList/>
+      <RefreshAccessTokenModule/>
     </div>
   );
 }
