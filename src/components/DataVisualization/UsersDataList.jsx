@@ -1,23 +1,19 @@
 import axios from "axios";
 import React, {useState} from "react";
 
-const UsersDataList = () => {
-    const [usersList, setUsersList] = useState([]);    
+const UsersDataList = () => {  
+    const [response, setResponse] = useState({'Juan':'Es un pendejo'});
 
     const fetchUsers = async () => {
         // Fetch users from backend
         try {
-            const response = await axios.get('http://localhost/api/users/', {
+            setResponse(await axios.get('http://localhost:10200/api/users-usernames/', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
-            });
-
-            if (response) {
-                setUsersList(response.data)
-            }
+            }));
         } catch (error) {
-            alert('Impossible to fetch data')
+            alert(`Impossible to fetch data: ${error.response ? error.response.data.detail : error.message}`);
         }
     }
     
@@ -27,9 +23,7 @@ const UsersDataList = () => {
             <h2>Users List</h2>
             <button onClick={fetchUsers}>Fetch</button>
             <div>
-                {usersList.map((user, index) => (
-                    <p key={index}>{user}</p>
-                ))}
+                {JSON.stringify(response.data)}
             </div>
         </>
     );
