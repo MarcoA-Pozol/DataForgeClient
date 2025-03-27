@@ -18,11 +18,13 @@ const LoginView = () => {
                 username, // Body
                 password, // Body
             });
-            
-            // Save tokens in LocalStorage or state management
-            localStorage.setItem('accessToken', response.data.access);
-            localStorage.setItem('refreshToken', response.data.refresh);
-            alert('Valid credentials');
+
+            if (response.status === 200) {
+                // Save tokens in LocalStorage or state management
+                localStorage.setItem('accessToken', response.data.access);
+                localStorage.setItem('refreshToken', response.data.refresh);
+                alert('Valid credentials');
+            }
         } catch (error) {
             setErrorMessage('Invalid credentials');
         }
