@@ -24,9 +24,11 @@ const LoginView = () => {
                 localStorage.setItem('accessToken', response.data.access);
                 localStorage.setItem('refreshToken', response.data.refresh);
                 alert('Valid credentials');
+            } else {
+                setErrorMessage('Invalid credentials', response.status)
             }
         } catch (error) {
-            setErrorMessage('Invalid credentials');
+            setErrorMessage('An error ocurred during user credentials validation.');
         }
     };
 
