@@ -1,7 +1,8 @@
-'use client'; // This forces Next.js to treat this as a client component
+"use client"; // This forces Next.js to treat this as a client component
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import "../../../styles/LoginView.css";
 
 const LoginView = () => {
     // User's formulary data
@@ -34,9 +35,15 @@ const LoginView = () => {
 
     return (
         <div className='login-view'>
-            <h2>Login</h2>
+            <div className="blobs">
+                <div className="blob"></div>
+                <div className="blob"></div>
+                <div className="blob"></div>
+            </div>
 
             <form className='login-formulary' onSubmit={handleAuthentication}>
+                <h2>Login</h2>
+
                 <label>
                     Username: <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </label>
@@ -46,6 +53,8 @@ const LoginView = () => {
                 </label>
 
                 <button type="submit">Login</button>
+
+                <span>I do not have an account yet</span>
             </form>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
