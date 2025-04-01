@@ -83,6 +83,14 @@
     font-weight: bold;
 }
 
+#no-account-button{
+    font-weight: bold;
+}
+#no-account-button:hover{
+    color: rgb(145, 170, 240);
+    cursor: pointer;
+}
+
 
 /* ################## ANIMATIONS AND STYLING ################### */
 /* Blobs */
@@ -123,7 +131,7 @@
 
 
 /* ################## RESPONSIVENESS ################### */
-@media (max-width: 400px) {
+@media (max-width: 700px) {
     .login-formulary {
         width: 90%;
     }
