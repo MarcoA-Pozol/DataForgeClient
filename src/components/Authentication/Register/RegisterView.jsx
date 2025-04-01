@@ -12,7 +12,7 @@ const RegisterView = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [country, setCountry] = useState("");
-    const [profilePicture, setProfilePicture] = useState("")
+    const [profilePicture, setProfilePicture] = useState(null)
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     // Message for invalid formulary data or an error ocurred
@@ -112,6 +112,13 @@ const RegisterView = () => {
         }
     };
 
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]; // Get the first selected file
+        if (file) {
+            setProfilePicture(URL.createObjectURL(file)); // Create a preview URL
+        }
+    };
+
     return (
         <div className='register-view'>
             <div className="blobs">
@@ -136,8 +143,9 @@ const RegisterView = () => {
                 </label>
 
                 <label>
-                    Profile Picture: <input type="text" value={profilePicture} onChange={(e) => setProfilePicture(e.target.value)}/>
+                    Profile Picture: <input type="file" accept="image/*" onChange={handleImageChange}/>
                 </label>
+                {profilePicture && <img src={profilePicture} alt="Preview" style={{width: "200px", marginTop: "10px", border:"3px solid royalblue", borderRadius:"20px", alignSelf:"center"}}/>} {/*Display a preview of profile image if selected one in the profile picture input*/}
                 
                 <label>
                     Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
