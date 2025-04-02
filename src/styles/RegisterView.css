@@ -1,7 +1,8 @@
 /* Form container */
 .register-formulary {
     background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
+    padding-inline: 2rem;
+    padding-bottom: 10px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -21,14 +22,16 @@
 
 /* Input fields */
 .register-formulary input {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
     outline: none;
     transition: all 0.3s ease;
+    font-family: monospace;
+    text-align: center;
 }
 
 .register-formulary input:focus {

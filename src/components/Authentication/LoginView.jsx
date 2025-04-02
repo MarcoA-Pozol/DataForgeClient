@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import "../../../styles/LoginView.css";
+import "../../styles/LoginView.css";
 
 const LoginView = () => {
     // User's formulary data
@@ -53,8 +53,6 @@ const LoginView = () => {
                 </label>
 
                 <button type="submit">Login</button>
-
-                <span id="no-account-button">I do not have an account yet</span>
             </form>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}

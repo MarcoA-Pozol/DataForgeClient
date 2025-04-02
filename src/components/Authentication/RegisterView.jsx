@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import "../../../styles/RegisterView.css";
+import "../../styles/RegisterView.css";
 
 const RegisterView = () => {
     // Data options 
@@ -157,8 +157,6 @@ const RegisterView = () => {
 
 
                 <button type="submit">Register</button>
-
-                <span id="existing-account-button">I already have an account</span>
             </form>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}

@@ -1,18 +1,34 @@
 import React, {useState} from "react";
-import LoginView from "./Login/LoginView.jsx";
-import RegisterView from "./Register/RegisterView.jsx";
-import LogoutButton from "./LogoutButton.jsx";
-import JWTRefresh from "../Authentication/JWTManagement/JWTRefresh.jsx";
+import LoginView from "./LoginView.jsx";
+import RegisterView from "./RegisterView.jsx";
+import JWTRefresh from "./JWTRefresh.jsx";
 import "../../styles/AuthenticationView.css";
 
 const AuthenticationView = () => {
+    const [isLoginVisible, setIsLoginVisible] = useState(true);
+
+    const toggleForm = () => {
+        /*Toggle between login and Register formularies*/
+        setIsLoginVisible((prev) => !prev);
+    };
 
     return(
         <div className="authentication-view">
+            {isLoginVisible ? (
+                <>
+                    <LoginView/>
+                    <br></br>
+                    <span id="no-account-button" onClick={toggleForm}>I do not have an account yet</span>
+                </>
+                
+            ): (
+                <>
+                    <RegisterView/>
+                    <br></br>
+                    <span id="existing-account-button" onClick={toggleForm}>I already have an account</span>
+                </>
+            )}
             <JWTRefresh/>
-            <LoginView/>
-            <RegisterView/>
-            <LogoutButton/>
         </div>
     );
 }
