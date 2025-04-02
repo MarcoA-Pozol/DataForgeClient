@@ -1,11 +1,12 @@
 /* ################## COMPONENT ################### */
 .authentication-view {
     position: absolute; /* Content can be placed correctly */
+    padding-block: 50px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     background: linear-gradient(to right, #13043d, #076581);
     color: #fff;
     font-family: 'Inter', sans-serif;
