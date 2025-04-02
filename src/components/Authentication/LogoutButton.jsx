@@ -22,7 +22,7 @@ const LogoutButton = () => {
             if (response.status === 205){
                 // Destroy session token
                 sessionStorage.removeItem("refreshToken");
-                navigate("/login");
+                navigate("/authentication");
             } else {
                 setErrorMessage(`Impossible to close session.`)
             }

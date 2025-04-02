@@ -1,14 +1,8 @@
 import './App.css';
-import RefreshAccessTokenModule from './components/Authentication/JWTManagement/JWTRefresh.jsx';
-import AuthenticationView from "./components/Authentication/AuthenticationView.jsx";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return (
-    <div className="App">
-      <AuthenticationView/>
-      <RefreshAccessTokenModule/>
-    </div>
-  );
+  return <AppRoutes/>
 }
 
 export default App;
