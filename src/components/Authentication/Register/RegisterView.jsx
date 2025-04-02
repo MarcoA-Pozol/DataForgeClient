@@ -120,7 +120,7 @@ const RegisterView = () => {
     };
 
     return (
-        <div className='register-view'>
+        <>
             <div className="blobs">
                 <div className="blob"></div>
                 <div className="blob"></div>
@@ -162,7 +162,7 @@ const RegisterView = () => {
             </form>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        </div>
+        </>
     );
 };
 
