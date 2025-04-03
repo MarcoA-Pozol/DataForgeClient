@@ -1,6 +1,7 @@
 "use client"; // This forces Next.js to treat this as a client component
 
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../../styles/LoginView.css";
 
@@ -25,6 +26,7 @@ const LoginView = () => {
                 localStorage.setItem('accessToken', response.data.access);
                 localStorage.setItem('refreshToken', response.data.refresh);
                 alert('Valid credentials');
+                navigate("/home");
             } else {
                 setErrorMessage('Invalid credentials', response.status)
             }
