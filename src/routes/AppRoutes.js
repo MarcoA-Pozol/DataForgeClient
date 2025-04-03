@@ -6,7 +6,11 @@ const AppRoutes = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/authentication" element={<AuthenticationView />}/>
+				<Route path="/" element={<Home/>}/>
+                <Route path="/authentication" element={<AuthenticationView/>}/>
+                <Route path="/parsedata" element={<AuthenticationView/>}/>
+				<Route path="/visualizedata" element={<AuthenticationView/>}/>
+				<Route path="*" element={<PageNotFound />} />
             </Routes>
         </Router>
     );
