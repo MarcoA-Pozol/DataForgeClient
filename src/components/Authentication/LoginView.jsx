@@ -10,6 +10,7 @@ const LoginView = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate()
 
     const handleAuthentication = async (event) => {
         event.preventDefault(); // Prevent page refresh on form submission
