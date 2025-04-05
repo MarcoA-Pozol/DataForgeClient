@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import LoginView from "./LoginView.jsx";
 import RegisterView from "./RegisterView.jsx";
-import JWTRefresh from "./JWTRefresh.jsx";
+// import JWTRefresh from "./JWTRefresh.jsx";
 import PageTransition from "../Animations.jsx";
 import "../../styles/AuthenticationView.css";
 
@@ -30,7 +30,7 @@ const AuthenticationView = () => {
                         <span id="existing-account-button" onClick={toggleForm}>I already have an account</span>
                     </>
                 )}
-                <JWTRefresh/>
+                {/*<JWTRefresh/>*/}
             </div>
         </PageTransition>
     );
