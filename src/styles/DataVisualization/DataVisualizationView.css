@@ -1,0 +1,11 @@
+body{
+    background: linear-gradient(90deg, #ffffff, #99c0fd);
+}
+#title-text{
+    font-family: monospace;
+    color: #f3f2a6;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-top: 10px;
+    box-shadow: 20px 2px 20px;
+}

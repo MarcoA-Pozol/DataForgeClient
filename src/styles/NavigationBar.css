@@ -11,11 +11,11 @@
   
   .navigation-bar {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     align-items: center;
     padding: 16px 32px;
-    background: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Azul oscuro a azul vibrante */
-    color: white;
+    background: linear-gradient(90deg, #e29b8e, #064dc0); /* Azul oscuro a azul vibrante */
+    color: rgba(255, 255, 255, 0.986);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -24,20 +24,44 @@
     top: 0;
     z-index: 999;
   }
+
+  .navigation-bar .active-link h3 {
+    border-bottom: 3px solid #e29b8e;
+    padding-bottom: 4px;
+    color: #e29b8e;
+  }
+
+  #dataforge-logo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0px;
+    height: 10px;
+    gap: 5px;
+  }
+  #dataforge-logo{
+    width: 50px;
+    height: 50px;
+  }
+  #dataforge-title{
+    color: #092046;
+    font-weight: bold;
+    font-size: 2.0rem;
+  }
   
   .navigation-bar a {
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
     margin: 0 16px;
     transition: all 0.3s ease-in-out;
     padding: 8px 12px;
     border-radius: 8px;
+    font-weight: bold;
   }
   
   .navigation-bar a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
-    color: #facc15; /* Amarillo cálido */
+    color: #ec958a; /* Amarillo cálido */
   }
   
   .navigation-bar h3 {
@@ -45,10 +69,5 @@
     font-weight: 600;
     font-size: 18px;
     transition: color 0.3s ease;
+    font-weight: bold;
   }
-  
-  /* Opcional: cambio de color al hacer clic en la pestaña activa */
-  .navigation-bar a.active h3 {
-    color: #facc15;
-    text-decoration: underline;
-  }  
