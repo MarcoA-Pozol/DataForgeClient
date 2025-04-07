@@ -3,6 +3,7 @@ import NavigationBar from "../Application/NavigationBar";
 import "../../styles/DataVisualization/DataVisualizationView.css";
 import DataFileInputFormulary from "./DataFileInputFormulary";
 import DataFileFilteringFormulary from "./DataFileFilteringFormulary";
+import DataChartContainer from "./DataChartContainer";
 
 const DataVisualizationView = () => {
     const [fileHeaders, setFileHeaders] = useState([]);
@@ -21,6 +22,7 @@ const DataVisualizationView = () => {
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
             <DataFileFilteringFormulary headers={fileHeaders} rows={fileRows}/>
+            <DataChartContainer/>
         </div>
     );
 }
