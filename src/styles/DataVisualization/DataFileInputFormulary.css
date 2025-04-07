@@ -16,21 +16,38 @@
     font-weight: bold;
     font-size: 1rem;
 }
-#clean-uploaded-file-button{
-    position: relative;
-    bottom: 30px;
-    left: 520px;
-    font: bold;
-    font-family: monospace;
+.dropzone {
+    padding: 1.5rem;
+    border: 2px dashed #0077ff;
+    border-radius: 8px;
     text-align: center;
-    border: none;
-    background-color: transparent;
-    color: rgba(120, 160, 250, 0.6);
-    font-size: 1.2rem;
+    background-color: #e6f0ff;
     cursor: pointer;
-    transition: 0.4s ease-in-out;
+    transition: background-color 0.3s ease;
+    color: #e29b8e;
 }
-#clean-uploaded-file-button:hover{
-    transform: translateY(-2px);
+.dropzone:hover {
+    background-color: #d0e7ff;
+    color: #ff6961;
+}
+.clean-uploaded-file-button {
+    position: relative;
+    bottom: 70px;
+    left: 530px;
+    background-color: #ff6961;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
     font-weight: bold;
+}
+.hided{
+    background-color: transparent;
+    color: transparent;
+}
+
+#file-info {
+    font-weight: bold;
+    color: green;
 }
