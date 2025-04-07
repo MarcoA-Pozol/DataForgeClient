@@ -1,8 +1,9 @@
 import React, {useState, useCallback} from "react";
 import { useDropzone } from "react-dropzone";
+import * as XLSX from "xlsx";
 import "../../styles/DataVisualization/DataFileInputFormulary.css";
 
-const DataFileInputFormulary = () => {
+const DataFileInputFormulary = ({onParsedFile}) => {
    const [uploadedFile, setUploadedFile] = useState(null);
 
     // Drop files function
@@ -13,8 +14,23 @@ const DataFileInputFormulary = () => {
             setUploadedFile(file);
             localStorage.setItem("UploadedFileInDataVisualization", file.name);
             localStorage.setItem("IsFileUploadedInDataVisualization", true);
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: "array" });
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                const headers = jsonData[0];
+                const rows = jsonData.slice(1);
+
+                // 🔥 Send parsed data to parent
+                onParsedFile(headers, rows);
+            };
+            reader.readAsArrayBuffer(file);
         }
-    }, []);
+    }, [onParsedFile]);
 
     // Validation of files
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop,
@@ -46,11 +62,6 @@ const DataFileInputFormulary = () => {
                     <p>🗂️ Drag and drop a file here, or click to select one</p>
                 )}
             </div>
-
-            {/* Browse files manually */}
-            {/*<form onChange={(e) => onDrop(e.target.files)} accept=".csv, .xlsx, .xls" className="file-upload-formulary">
-                <label>File (csv, xlsx, xls) <input type="file" value={uploadedFile}></input></label>
-            </form>*/}
             
             {/* Clean selected file */}
             {uploadedFile ? (<button className="clean-uploaded-file-button" onClick={cleanUploadedFile}>Clean</button>)
