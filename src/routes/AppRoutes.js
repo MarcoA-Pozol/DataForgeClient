@@ -14,8 +14,9 @@ const AppRoutes = () => {
                 <Routes>
                     <Route path="/" element={<HomeView/>}/>
                     <Route path="/datavisualization" element={<DataVisualizationView/>}/>
+                    <Route path="/dataimportexport" element={<DataManagementView/>}/>
+                    <Route path="/datareporting" element={<DataManagementView/>}/>
                     <Route path="/authentication" element={<AuthenticationView/>}/>
-                    <Route path="/datamanagement" element={<DataManagementView/>}/>
                     <Route path="*" element={<PageNotFoundView/>} />
                 </Routes>
             </Router>
