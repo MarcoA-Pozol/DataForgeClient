@@ -1,0 +1,13 @@
+.filtering-container{
+    background-color: antiquewhite;
+    position: relative;
+    bottom: 305px;
+    left:750px;
+    height: 245px;
+    border: 2px dotted darkslateblue;
+    border-radius: 10px;
+    width: 40%;
+    padding: 20px 10px;
+    color: blue;
+    text-align: center;
+}
