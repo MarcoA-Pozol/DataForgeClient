@@ -25,7 +25,7 @@ const DataVisualizationView = () => {
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
             <DataFileFilteringFormulary onFilteredData={handleFilteredData} headers={headers} rows={rows}/>
-            <DataChartContainer data={filteredData}/>
+            <DataChartContainer filteredData={filteredData}/>
         </div>
     );
 }

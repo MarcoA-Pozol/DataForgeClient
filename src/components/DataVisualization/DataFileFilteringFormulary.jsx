@@ -1,10 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import "../../styles/DataVisualization/DataFileFilteringFormulary.css";
 
 const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
-    const filterData = useCallback((e) => {
-        const filteredData = "";
-        onFilteredData(filteredData);
+    const [selectedColumn, setSelectedColumn] = useState("");
+
+    const handleColumnChange = useCallback((e) => {
+        const column = e.target.value;
+        setSelectedColumn(column);
+
+        // Example filtering: count how many times each value appears in that column
+        const counts = {};
+        rows.forEach((row) => {
+            const value = row[headers.indexOf(column)];
+            if (value) {
+            counts[value] = (counts[value] || 0) + 1;
+            }
+        });
+
+        // Format for Recharts
+        const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
+        onFilteredData(formatted);
     }, [onFilteredData, rows, headers]);
 
     return(
@@ -14,9 +29,10 @@ const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
             {headers.length > 0 ? (
                 <div>
                     <label>Select a column:
-                        <select onChange={filterData}>
+                        <select onChange={handleColumnChange}>
+                            <option value="">-- Select --</option>
                             {headers.map((header, i) => (
-                                <option key={i}>{header}</option>
+                                <option key={i} value={header}>{header}</option>
                             ))}
                         </select>
                     </label>
