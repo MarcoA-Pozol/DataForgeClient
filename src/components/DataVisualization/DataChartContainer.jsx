@@ -1,6 +1,5 @@
 // ExcelReader.jsx
 import React, { useState } from "react";
-import * as XLSX from "xlsx";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 
 export default function ExcelReader() {

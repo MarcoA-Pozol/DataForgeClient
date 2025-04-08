@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "../../styles/DataVisualization/DataFileFilteringFormulary.css";
 
-const DataFileFilteringFormulary = ({headers, rows}) =>{
+const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
+    const filterData = useCallback((e) => {
+        const filteredData = "";
+        onFilteredData(filteredData);
+    }, [onFilteredData, rows, headers]);
+
     return(
         <div className="filtering-container">
             <h3>2. Filter Data</h3>
@@ -9,7 +14,7 @@ const DataFileFilteringFormulary = ({headers, rows}) =>{
             {headers.length > 0 ? (
                 <div>
                     <label>Select a column:
-                        <select>
+                        <select onChange={filterData}>
                             {headers.map((header, i) => (
                                 <option key={i}>{header}</option>
                             ))}

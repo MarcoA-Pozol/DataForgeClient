@@ -6,23 +6,26 @@ import DataFileFilteringFormulary from "./DataFileFilteringFormulary";
 import DataChartContainer from "./DataChartContainer";
 
 const DataVisualizationView = () => {
-    const [fileHeaders, setFileHeaders] = useState([]);
-    const [fileRows, setFileRows] = useState([]);
+    const [headers, setHeaders] = useState([]);
+    const [rows, setRows] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
     // Callback to receive parsed file data
     const handleParsedFile = (headers, rows) => {
-        setFileHeaders(headers);
-        setFileRows(rows);
-        console.log(fileHeaders);
-        console.log(fileRows);
+        setHeaders(headers);
+        setRows(rows);
+    };
+
+    const handleFilteredData = (filteredData) => {
+        setFilteredData(filteredData);
     };
 
     return(
         <div>
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
-            <DataFileFilteringFormulary headers={fileHeaders} rows={fileRows}/>
-            <DataChartContainer/>
+            <DataFileFilteringFormulary onFilteredData={handleFilteredData} headers={headers} rows={rows}/>
+            <DataChartContainer data={filteredData}/>
         </div>
     );
 }
