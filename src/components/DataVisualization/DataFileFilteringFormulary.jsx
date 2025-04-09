@@ -19,7 +19,7 @@ const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
         });
 
         // Get selected data key (column)
-        const dataKey = selectedColumn;
+        const dataKey = column;
         // Format for Recharts (Final data state ready to be plotted on the chart)
         const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
         onFilteredData(formatted, dataKey);
