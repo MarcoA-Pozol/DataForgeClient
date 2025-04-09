@@ -5,10 +5,11 @@ const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
     const [selectedColumn, setSelectedColumn] = useState("");
 
     const handleColumnChange = useCallback((e) => {
+        // Obtain column throught the formulary selected option
         const column = e.target.value;
         setSelectedColumn(column);
 
-        // Example filtering: count how many times each value appears in that column
+        // Filter how many times a value appears in the column
         const counts = {};
         rows.forEach((row) => {
             const value = row[headers.indexOf(column)];
@@ -17,9 +18,11 @@ const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
             }
         });
 
-        // Format for Recharts
+        // Get selected data key (column)
+        const dataKey = selectedColumn;
+        // Format for Recharts (Final data state ready to be plotted on the chart)
         const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
-        onFilteredData(formatted);
+        onFilteredData(formatted, dataKey);
     }, [onFilteredData, rows, headers]);
 
     return(

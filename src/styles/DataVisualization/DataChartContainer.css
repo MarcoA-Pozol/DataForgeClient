@@ -1,0 +1,13 @@
+.chart-block{
+    background-color: rgb(255, 223, 223);
+    color: rgb(0, 255, 55);
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+    bottom: 300px;
+    left: 50px;
+    border: 2px dotted purple;
+    font-weight: bold;
+    font-size: 2rem;
+    overflow-y: scroll;
+}
