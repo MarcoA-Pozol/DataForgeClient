@@ -5,9 +5,9 @@ import "../../styles/DataVisualization/DataChartContainer.css";
 
 const DataChartContainer = ({filteredData, selectedDataKey}) => {
   return(
-    <BarChart className="chart-block" width={1235} height={550} data={filteredData}>
+    <BarChart className="chart-block" width={1235} height={500} style={{marginTop:20}} data={filteredData}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="item" angle={-45} textAnchor="end" height={100} style={{fontSize:16}}/>
+      <XAxis dataKey="item" angle={-45} textAnchor="end" height={60} style={{fontSize:16}}/>
       <YAxis />
       <Tooltip />
       <Legend />

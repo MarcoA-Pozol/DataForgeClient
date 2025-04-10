@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from "react";
-import "../../styles/DataVisualization/DataFileFilteringFormulary.css";
+import "../../styles/DataVisualization/DataFilteringForm.css";
 
-const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
-    const [selectedColumn, setSelectedColumn] = useState("");
+const DataFilteringForm = ({onFilteredData, headers, rows}) =>{
 
     const handleColumnChange = useCallback((e) => {
         // Obtain column throught the formulary selected option
         const column = e.target.value;
-        setSelectedColumn(column);
 
         // Filter how many times a value appears in the column
         const counts = {};
@@ -48,4 +46,4 @@ const DataFileFilteringFormulary = ({onFilteredData, headers, rows}) =>{
     );
 }
 
-export default DataFileFilteringFormulary;
+export default DataFilteringForm;

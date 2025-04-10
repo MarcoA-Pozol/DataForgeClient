@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import NavigationBar from "../Application/NavigationBar";
 import "../../styles/DataVisualization/DataVisualizationView.css";
 import DataFileInputFormulary from "./DataFileInputFormulary";
-import DataFileFilteringFormulary from "./DataFileFilteringFormulary";
+import DataFilteringForm from "./DataFilteringForm";
 import DataChartContainer from "./DataChartContainer";
 
 const DataVisualizationView = () => {
@@ -26,7 +26,7 @@ const DataVisualizationView = () => {
         <div>
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
-            <DataFileFilteringFormulary onFilteredData={handleFilteredData} headers={headers} rows={rows}/>
+            <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows}/>
             <DataChartContainer filteredData={filteredData} selectedDataKey={dataKey}/>
         </div>
     );
