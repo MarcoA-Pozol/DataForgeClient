@@ -3,7 +3,7 @@ import "../../styles/DataVisualization/DataFilteringForm.css";
 
 const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState([]);
-
+    console.log(types)
     const handleColumnChange = (e) => {
         /* Obtain the selected column type */
         const type = e.target.value // [name:"string", age:"number", salary:"number", is_active:"boolean"]
@@ -44,8 +44,10 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
                     <label>Select a column:
                         <select onChange={handleColumnChange}>
                             <option value="">-- Select --</option>
-                            {types.map((type, i) => (
-                                <option key={i} value={type}>{type}</option>
+                            {Object.entries(types).map(([column, type]) => (
+                                <option key={column} value={column}>
+                                    {column} ({type})
+                                </option>
                             ))}
                         </select>
                     </label>
