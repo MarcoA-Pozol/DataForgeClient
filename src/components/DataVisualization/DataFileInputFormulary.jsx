@@ -15,6 +15,7 @@ const DataFileInputFormulary = ({onParsedFile}) => {
             localStorage.setItem("UploadedFileInDataVisualization", file.name);
             localStorage.setItem("IsFileUploadedInDataVisualization", true);
 
+
             const reader = new FileReader();
             reader.onload = (e) => {
                 const data = new Uint8Array(e.target.result);
@@ -25,8 +26,34 @@ const DataFileInputFormulary = ({onParsedFile}) => {
                 const headers = jsonData[0];
                 const rows = jsonData.slice(1);
 
-                // 🔥 Send parsed data to parent
-                onParsedFile(headers, rows);
+                // Obtain types of columns
+                const types = {};
+
+                headers.forEach((header, index) => {
+                    const columnValues = rows.map(row => row[index]);
+
+                    let isNumber = true;
+                    let isBoolean = true;
+
+                    // Column type validation
+                    for (let val of columnValues) {
+                        const normalized = val?.toString().trim().toLowerCase();
+
+                        if (isNaN(Number(val))) isNumber = false; // If column is not a number, set isNumber to false.
+                        if (normalized !== "true" && normalized !== "false") isBoolean = false; // If column is not a boolean, set isBoolean to false.
+                    }
+
+                    if (isBoolean) {
+                        types[header] = "boolean";
+                    } else if (isNumber) {
+                        types[header] = "number";
+                    } else {
+                        types[header] = "string";
+                    }
+                });
+
+                // Send parsed data to parent
+                onParsedFile(headers, rows, types);
             };
             reader.readAsArrayBuffer(file);
         }

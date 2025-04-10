@@ -7,14 +7,16 @@ import DataChartContainer from "./DataChartContainer";
 
 const DataVisualizationView = () => {
     const [headers, setHeaders] = useState([]);
+    const [types, setTypes] = useState({});
     const [rows, setRows] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [dataKey, setDataKey] = useState("Total");
 
     // Callback to receive parsed file data
-    const handleParsedFile = (headers, rows) => {
+    const handleParsedFile = (headers, rows, types) => {
         setHeaders(headers);
         setRows(rows);
+        setTypes(types);
     };
 
     const handleFilteredData = (filteredData, dataKey) => {
@@ -26,7 +28,7 @@ const DataVisualizationView = () => {
         <div>
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
-            <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows}/>
+            <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
             <DataChartContainer filteredData={filteredData} selectedDataKey={dataKey}/>
         </div>
     );
