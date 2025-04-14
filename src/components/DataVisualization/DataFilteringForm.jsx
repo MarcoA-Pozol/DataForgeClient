@@ -3,21 +3,35 @@ import "../../styles/DataVisualization/DataFilteringForm.css";
 
 const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState([]);
-    console.log(types)
-    const handleColumnChange = (e) => {
-        /* Obtain the selected column type */
-        const type = e.target.value // [name:"string", age:"number", salary:"number", is_active:"boolean"]
-        if (type === "string" || type === "boolean") {
-            setSelectedVisualizationOptions(["Count per Value",]);
-        } else if (type === "number") {
-            setSelectedVisualizationOptions(["Count per Value", "Show Value per Given Index"]);
-        }
-        return null;
-    };
 
     const handleColumnChanges = useCallback((e) => {
         // Obtain column throught the formulary selected option
         const column = e.target.value;
+        let isNumber = true;
+        let isBoolean = true;
+
+        // Column index and value
+        const columnIndex = headers.indexOf(column);
+        const columnValues = rows.map(row => row[columnIndex]);
+
+        // Column type validation
+        for (let val of columnValues) {
+            const normalized = val?.toString().trim().toLowerCase();
+    
+            if (isNaN(Number(val))) isNumber = false;
+            if (normalized !== "true" && normalized !== "false") isBoolean = false;
+        }
+    
+        if (isBoolean) {
+            types[column] = "boolean";
+            setSelectedVisualizationOptions(["Count", "Value per Index"]);
+        } else if (isNumber) {
+            types[column] = "number";
+            setSelectedVisualizationOptions(["Count", "Value per Index"]);
+        } else {
+            types[column] = "string";
+            setSelectedVisualizationOptions(["Count"]);
+        }
 
         // Filter how many times a value appears in the column
         const counts = {};
@@ -42,7 +56,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
             {headers.length > 0 ? (
                 <div>
                     <label>Select a column:
-                        <select onChange={handleColumnChange}>
+                        <select onChange={handleColumnChanges}>
                             <option value="">-- Select --</option>
                             {Object.entries(types).map(([column, type]) => (
                                 <option key={column} value={column}>

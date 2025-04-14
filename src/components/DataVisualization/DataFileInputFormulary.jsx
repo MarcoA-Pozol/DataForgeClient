@@ -23,10 +23,10 @@ const DataFileInputFormulary = ({onParsedFile}) => {
                 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-                const headers = jsonData[0];
-                const rows = jsonData.slice(1);
+                const headers = jsonData[0]; // Get headers/columns of the dataset (horizontal axis)
+                const rows = jsonData.slice(1); // Get rows from vertical axis (up->down)
 
-                // Obtain types of columns
+                // Obtain types of columns (to let the user to choose the visualization mode: count, compare values in case of numeric rows)
                 const types = {};
 
                 headers.forEach((header, index) => {
