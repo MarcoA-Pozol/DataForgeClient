@@ -23,6 +23,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
             const dataKey = column;
             // Format for Recharts (Final data state ready to be plotted on the chart)
             const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
+            console.log(`Formated:${formatted}`)
             onFilteredData(formatted, dataKey);
         } else if (selectedVisualizationMode === "Value per Index") {
             const comparative_index = "Name"; // this could be dynamic later
@@ -41,8 +42,8 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
                 };
             });
 
-            console.log(`Formated:${formatted}`)
-            const dataKey = column; // Should be [Example]: [{Name:'Juan', Age:28}, {Name:'Alinne', Age:32}], not [object Object],[object Object],[object Object],[object Object],[object Object]
+            console.log(`Formated:${formatted}`) // Should be [Example]: [{Name:'Juan', Age:28}, {Name:'Alinne', Age:32}], not [object Object],[object Object],[object Object],[object Object],[object Object]
+            const dataKey = column; 
             onFilteredData(formatted, dataKey);
         }
 
