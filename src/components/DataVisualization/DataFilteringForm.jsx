@@ -3,15 +3,60 @@ import "../../styles/DataVisualization/DataFilteringForm.css";
 
 const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState([]);
+    const [column, setColumn] = useState("");
 
-    const handleColumnChanges = useCallback((e) => {
+    const handleVisualizationMode = useCallback((e) => {
+        // Get choosen visualization mode
+        const selectedVisualizationMode = e.target.value;
+
+        // Validate selected mode
+        if (selectedVisualizationMode === "Count") {
+            // Filter how many times a value appears in the column
+            const counts = {};
+            rows.forEach((row) => {
+                const value = row[headers.indexOf(column)];
+                if (value) {
+                counts[value] = (counts[value] || 0) + 1;
+                }
+            });
+            // Get selected data key (column)
+            const dataKey = column;
+            // Format for Recharts (Final data state ready to be plotted on the chart)
+            const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
+            onFilteredData(formatted, dataKey);
+        } else if (selectedVisualizationMode === "Value per Index") {
+            const comparative_index = "Name"; // this could be dynamic later
+
+            const colIndex = headers.indexOf(column);
+            const compIndex = headers.indexOf(comparative_index);
+
+            if (colIndex === -1 || compIndex === -1) return; // Do not filter until column and comparative index are selected
+
+            const formatted = rows.map((row) => {
+                const xLabel = row[compIndex];
+                const yValue = row[colIndex];
+                return {
+                    [comparative_index]: xLabel,
+                    [column]: isNaN(yValue) ? yValue : Number(yValue),
+                };
+            });
+
+            console.log(`Formated:${formatted}`)
+            const dataKey = column; // Should be [Example]: [{Name:'Juan', Age:28}, {Name:'Alinne', Age:32}], not [object Object],[object Object],[object Object],[object Object],[object Object]
+            onFilteredData(formatted, dataKey);
+        }
+
+    }, [onFilteredData, column, rows, headers]);
+
+    const handleColumnChanges = ((e) => {
         // Obtain column throught the formulary selected option
-        const column = e.target.value;
         let isNumber = true;
         let isBoolean = true;
+        const selectedColumn = e.target.value;
+        setColumn(selectedColumn);
 
         // Column index and value
-        const columnIndex = headers.indexOf(column);
+        const columnIndex = headers.indexOf(selectedColumn);
         const columnValues = rows.map(row => row[columnIndex]);
 
         // Column type validation
@@ -32,22 +77,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
             types[column] = "string";
             setSelectedVisualizationOptions(["Count"]);
         }
-
-        // Filter how many times a value appears in the column
-        const counts = {};
-        rows.forEach((row) => {
-            const value = row[headers.indexOf(column)];
-            if (value) {
-            counts[value] = (counts[value] || 0) + 1;
-            }
-        });
-
-        // Get selected data key (column)
-        const dataKey = column;
-        // Format for Recharts (Final data state ready to be plotted on the chart)
-        const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
-        onFilteredData(formatted, dataKey);
-    }, [onFilteredData, rows, headers, types]);
+    });
 
     return(
         <div className="filtering-container">
@@ -67,7 +97,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
                     </label>
 
                     <label>Select a visualization mode:
-                        <select>
+                        <select onChange={handleVisualizationMode} disabled={!column || selectedVisualizationOptions.length === 0}> {/* Prevent user from selecting a visualization mode before a column is selected */}
                             <option value="">-- Select --</option>
                             {selectedVisualizationOptions.map((visualizationOption, i) => (
                                 <option key={i} value={visualizationOption}>{visualizationOption}</option>

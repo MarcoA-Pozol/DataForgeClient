@@ -60,7 +60,7 @@ const DataFileInputFormulary = ({onParsedFile}) => {
     }, [onParsedFile]);
 
     // Validation of files
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop,
+    const {getRootProps, getInputProps} = useDropzone({onDrop,
         accept: {
             'text/csv': ['.csv'], // Accept .csv files
             'application/vnd.ms-excel': ['.xls'], // Accept .xls or sheets files
