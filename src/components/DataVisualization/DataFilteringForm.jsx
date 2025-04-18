@@ -26,7 +26,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
             console.log(`Formated:${formatted}`)
             onFilteredData(formatted, dataKey);
         } else if (selectedVisualizationMode === "Value per Index") {
-            const comparative_index = "Name"; // this could be dynamic later
+            const comparative_index = "Airline"; // this could be dynamic later
 
             const colIndex = headers.indexOf(column);
             const compIndex = headers.indexOf(comparative_index);
@@ -42,9 +42,9 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
                 };
             });
 
-            console.log(`Formated:${formatted}`) // Should be [Example]: [{Name:'Juan', Age:28}, {Name:'Alinne', Age:32}], not [object Object],[object Object],[object Object],[object Object],[object Object]
-            const dataKey = column; 
-            onFilteredData(formatted, dataKey);
+            const xKey = column; 
+            const yKey = comparative_index;
+            onFilteredData(formatted, xKey, yKey);
         }
 
     }, [onFilteredData, column, rows, headers]);

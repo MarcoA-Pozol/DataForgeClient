@@ -9,8 +9,9 @@ const DataVisualizationView = () => {
     const [headers, setHeaders] = useState([]);
     const [types, setTypes] = useState({});
     const [rows, setRows] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [dataKey, setDataKey] = useState("Total");
+    const [data, setData] = useState([]);
+    const [xKey, setXKey] = useState("X Label");
+    const [yKey, setYKey] = useState("Y Label");
 
     // Callback to receive parsed file data
     const handleParsedFile = (headers, rows, types) => {
@@ -19,9 +20,10 @@ const DataVisualizationView = () => {
         setTypes(types);
     };
 
-    const handleFilteredData = (filteredData, dataKey) => {
-        setFilteredData(filteredData);
-        setDataKey(dataKey);
+    const handleFilteredData = (data, xKey, yKey) => {
+        setData(data);
+        setXKey(xKey);
+        setYKey(yKey)
     };
 
     return(
@@ -29,7 +31,7 @@ const DataVisualizationView = () => {
             <NavigationBar/>
             <DataFileInputFormulary onParsedFile={handleParsedFile}/>
             <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
-            <DataChartContainer filteredData={filteredData} selectedDataKey={dataKey}/>
+            <DataChartContainer data={data} xKey={xKey} yKey={yKey}/>
         </div>
     );
 }
