@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomeView from "../components/Application/HomeView.jsx";
-import DataManagementView from "../components/Application/DataManagementView.jsx";
-import AuthenticationView from "../components/Authentication/AuthenticationView.jsx";
-import PageNotFoundView from "../components/PageNotFoundView.jsx";
-import DataVisualizationView from "../components/DataVisualization/DataVisualizationView.jsx";
+import HomeView from "../components/Application/HomeView";
+import DataManagementView from "../components/Application/DataManagementView";
+import AuthenticationView from "../components/Authentication/AuthenticationView";
+import PageNotFoundView from "../components/PageNotFoundView";
+import DataVisualizationView from "../components/DataVisualization/DataVisualizationView";
 import { AnimatePresence } from "framer-motion"; // Apply change between pages correctly
 
 const AppRoutes = () => {
