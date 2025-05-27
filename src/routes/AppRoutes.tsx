@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeView from "../components/Application/HomeView";
 import DataManagementView from "../components/Application/DataManagementView";

@@ -1,6 +1,5 @@
-import React from "react";
-import NavigationBar from "./NavigationBar.jsx";
-import PageTransition from "../Animations.jsx";
+import NavigationBar from "./NavigationBar.tsx";
+import PageTransition from "../Animations.tsx";
 
 const DataManagementView = () => {
 	return(

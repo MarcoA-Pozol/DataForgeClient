@@ -1,6 +1,5 @@
-import React from "react";
-import NavigationBar from "./NavigationBar.jsx";
-import PageTransition from "../Animations.jsx"; // To wrap component inside the transition component
+import NavigationBar from "./NavigationBar.tsx";
+import PageTransition from "../Animations.tsx"; // To wrap component inside the transition component
 import "../../styles/HomeView.css";
 
 const HomeView = () => {

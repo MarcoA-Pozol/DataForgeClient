@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import NavigationBar from "../Application/NavigationBar";
 import "../../styles/DataVisualization/DataVisualizationView.css";
 import DataFileInputFormulary from "./DataFileInputFormulary";

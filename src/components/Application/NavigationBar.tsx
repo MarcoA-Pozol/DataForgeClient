@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 // import LogoutButton from "../Authentication/LogoutButton.jsx";
 import "../../styles/NavigationBar.css";

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import "../../styles/DataVisualization/DataFilteringForm.css";
 
 const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{

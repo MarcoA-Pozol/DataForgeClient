@@ -1,5 +1,3 @@
-// ExcelReader.jsx
-import React from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 import "../../styles/DataVisualization/DataChartContainer.css";
 

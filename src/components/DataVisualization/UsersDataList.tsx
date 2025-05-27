@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState} from "react";
+import {useState} from "react";
 
 const UsersDataList = () => {  
     const [response, setResponse] = useState({'Juan':'Es un pendejo'});

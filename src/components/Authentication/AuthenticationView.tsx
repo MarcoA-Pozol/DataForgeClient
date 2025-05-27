@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import LoginView from "./LoginView.jsx";
-import RegisterView from "./RegisterView.jsx";
-// import JWTRefresh from "./JWTRefresh.jsx";
-import PageTransition from "../Animations.jsx";
+import {useState} from "react";
+import LoginView from "./LoginView.tsx";
+import RegisterView from "./RegisterView.tsx";
+// import JWTRefresh from "./JWTRefresh.tsx";
+import PageTransition from "../Animations.tsx";
 import "../../styles/AuthenticationView.css";
 
 const AuthenticationView = () => {
