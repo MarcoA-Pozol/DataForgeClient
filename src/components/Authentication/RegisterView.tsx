@@ -1,5 +1,4 @@
 "use client"; // This forces Next.js to treat this as a client component
-
 import React, { useState } from "react";
 import axios from "axios";
 import "../../styles/RegisterView.css";
@@ -12,13 +11,13 @@ const RegisterView = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [country, setCountry] = useState("");
-    const [profilePicture, setProfilePicture] = useState(null)
+    const [profilePicture, setProfilePicture] = useState<string | null>(null)
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     // Message for invalid formulary data or an error ocurred
     const [errorMessage, setErrorMessage] = useState("");
 
-    const handleRegistering = async (event) => {
+    const handleRegistering = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent page refresh on form submission
         setErrorMessage(""); // Clear previous errors
         
@@ -43,7 +42,7 @@ const RegisterView = () => {
         if (country.trim() === "") {
             setErrorMessage("Please select a country.");
             return;
-        } else if (country.trim in COUNTRIES === false) {
+        } else if (country.trim() in COUNTRIES === false) {
             setErrorMessage("Please select or insert a valid country.");
             return;
         } else if (!country.trim()) {
@@ -105,15 +104,15 @@ const RegisterView = () => {
                     setErrorMessage("Impossible to authenticate the new user.");
                 }
             } else {
-                setErrorMessage('It was impossible to create a new user account with the provided data.', response.status)
+                setErrorMessage(`It was impossible to create a new user account with the provided data. | ${response.status}`)
             }
         } catch (error) {
             setErrorMessage('An error ocurred during account creation.');
         }
     };
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0]; // Get the first selected file
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]; // Get the first selected file
         if (file) {
             setProfilePicture(URL.createObjectURL(file)); // Create a preview URL
         }
@@ -121,6 +120,7 @@ const RegisterView = () => {
 
     return (
         <>
+            {/* Blobs animations, just for making page visually appealing */}
             <div className="blobs">
                 <div className="blob"></div>
                 <div className="blob"></div>

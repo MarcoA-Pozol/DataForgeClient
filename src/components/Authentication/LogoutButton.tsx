@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../../styles/LogoutButton.css";
 import axios from "axios";
 
 const LogoutButton = () => {
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const navigate=useNavigate();
 
     // Get current session refresh token (JWT)

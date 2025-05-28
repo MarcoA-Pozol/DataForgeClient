@@ -1,18 +1,18 @@
 "use client"; // This forces Next.js to treat this as a client component
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../../styles/LoginView.css";
 
 const LoginView = () => {
     // User's formulary data
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const navigate = useNavigate()
 
-    const handleAuthentication = async (event) => {
+    const handleAuthentication = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Prevent page refresh on form submission
 
         try {
@@ -29,7 +29,7 @@ const LoginView = () => {
                 alert('Valid credentials');
                 navigate("/home");
             } else {
-                setErrorMessage('Invalid credentials', response.status)
+                setErrorMessage(`Invalid credentials | ${response.status}`)
             }
         } catch (error) {
             setErrorMessage('An error ocurred during user credentials validation.');

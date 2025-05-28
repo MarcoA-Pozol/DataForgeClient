@@ -6,7 +6,7 @@ import PageTransition from "../Animations.tsx";
 import "../../styles/AuthenticationView.css";
 
 const AuthenticationView = () => {
-    const [isLoginVisible, setIsLoginVisible] = useState(true);
+    const [isLoginVisible, setIsLoginVisible] = useState<boolean>(true);
 
     const toggleForm = () => {
         /*Toggle between login and Register formularies*/
