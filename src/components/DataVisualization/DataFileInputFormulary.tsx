@@ -1,4 +1,4 @@
-import {useState, useCallback, SetStateAction} from "react";
+import {useState, useCallback} from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import * as XLSX from "xlsx";
 import "../../styles/DataVisualization/DataFileInputFormulary.css";
@@ -36,7 +36,7 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
                 const rows = jsonData.slice(1); // Get rows from vertical axis (up->down)
 
                 // Obtain types of columns (to let the user to choose the visualization mode: count, compare values in case of numeric rows)
-                const types = {};
+                const types:Record<string, "string" | "number" | "boolean"> = {};
 
                 headers.forEach((header:string, index:any) => {
                     const columnValues = rows.map(row => row[index]);
