@@ -1,35 +1,44 @@
-import {useState, useCallback} from "react";
-import { useDropzone } from "react-dropzone";
+import {useState, useCallback, SetStateAction} from "react";
+import { FileWithPath, useDropzone } from "react-dropzone";
 import * as XLSX from "xlsx";
 import "../../styles/DataVisualization/DataFileInputFormulary.css";
 
-const DataFileInputFormulary = ({onParsedFile}:React.InputEvent<HTMLFormElement>) => {
-   const [uploadedFile, setUploadedFile] = useState(null);
+type CellValue = string | number | boolean | null;
+type Row = CellValue[];
+
+interface DataFileInputFormularyProps {
+    onParsedFile: (headers: string[], rows: Row[], types: Record<string, 'string' | 'number' | 'boolean'>) => void;
+}  
+
+const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
+   const [uploadedFile, setUploadedFile] = useState<FileWithPath |null>(null);
 
     // Drop files function
-    const onDrop = useCallback(acceptedFiles => {
+    const onDrop = useCallback((acceptedFiles:FileWithPath[]) => {
         // Do something with the files
         const file = acceptedFiles[0];
         if (file) {
             setUploadedFile(file);
             localStorage.setItem("UploadedFileInDataVisualization", file.name);
-            localStorage.setItem("IsFileUploadedInDataVisualization", true);
+            localStorage.setItem("IsFileUploadedInDataVisualization", "true");
 
 
             const reader = new FileReader();
-            reader.onload = (e) => {
-                const data = new Uint8Array(e.target.result);
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                const result = e.target?.result;
+                if (!result) return; 
+
+                const data = new Uint8Array(result as ArrayBuffer);
                 const workbook = XLSX.read(data, { type: "array" });
                 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-                const headers = jsonData[0]; // Get headers/columns of the dataset (horizontal axis)
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as Row[];
+                const headers = jsonData[0] as string[]; // Get headers/columns of the dataset (horizontal axis)
                 const rows = jsonData.slice(1); // Get rows from vertical axis (up->down)
 
                 // Obtain types of columns (to let the user to choose the visualization mode: count, compare values in case of numeric rows)
                 const types = {};
 
-                headers.forEach((header, index) => {
+                headers.forEach((header:string, index:any) => {
                     const columnValues = rows.map(row => row[index]);
 
                     let isNumber = true;
