@@ -1,18 +1,27 @@
 import { useCallback, useState } from "react";
 import "../../styles/DataVisualization/DataFilteringForm.css";
 
-const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
-    const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState([]);
+interface DataFilteringFormProps {
+    onFilteredData: (filteredData: any[], xKey: string, yKey?: string) => void;
+    headers: string[];
+    rows: any[][];
+    types: Record<string, "string" | "number" | "boolean">;
+}
+
+type VisualizationOption = "Count" | "Value per Index";
+
+const DataFilteringForm = ({onFilteredData, headers, rows, types}:DataFilteringFormProps) =>{
+    const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState<VisualizationOption[]>([]);
     const [column, setColumn] = useState("");
 
-    const handleVisualizationMode = useCallback((e) => {
+    const handleVisualizationMode = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
         // Get choosen visualization mode
         const selectedVisualizationMode = e.target.value;
 
         // Validate selected mode
         if (selectedVisualizationMode === "Count") {
             // Filter how many times a value appears in the column
-            const counts = {};
+            const counts: Record<string, number> = {};
             rows.forEach((row) => {
                 const value = row[headers.indexOf(column)];
                 if (value) {
@@ -49,7 +58,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}) =>{
 
     }, [onFilteredData, column, rows, headers]);
 
-    const handleColumnChanges = ((e) => {
+    const handleColumnChanges = ((e:React.ChangeEvent<HTMLSelectElement>) => {
         // Obtain column throught the formulary selected option
         let isNumber = true;
         let isBoolean = true;
