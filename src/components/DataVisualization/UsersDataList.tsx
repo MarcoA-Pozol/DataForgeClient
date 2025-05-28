@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState} from "react";
 
 const UsersDataList = () => {  
-    const [response, setResponse] = useState({'Juan':'Es un pendejo'});
+    const [response, setResponse] = useState({'data':{"one":"first row", "two":"second row"}});
 
     const fetchUsers = async () => {
         // Fetch users from backend

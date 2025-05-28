@@ -1,7 +1,13 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 import "../../styles/DataVisualization/DataChartContainer.css";
 
-const DataChartContainer = ({data, xKey, yKey}) => {
+type DataChartContainerProps = {
+  data:any[];
+  xKey:string;
+  yKey:string;
+}
+
+const DataChartContainer = ({data, xKey, yKey}:DataChartContainerProps) => {
   return(
     <BarChart className="chart-block" width={1235} height={500} style={{marginTop:20}} data={data}>
       <CartesianGrid strokeDasharray="3 3" />

@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import * as XLSX from "xlsx";
 import "../../styles/DataVisualization/DataFileInputFormulary.css";
 
-const DataFileInputFormulary = ({onParsedFile}) => {
+const DataFileInputFormulary = ({onParsedFile}:React.InputEvent<HTMLFormElement>) => {
    const [uploadedFile, setUploadedFile] = useState(null);
 
     // Drop files function
