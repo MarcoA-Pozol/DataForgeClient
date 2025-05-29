@@ -1,8 +1,13 @@
-import axios from "axios";
+import axios, {AxiosResponse, AxiosError} from "axios";
 import {useState} from "react";
 
+interface UserResponse {
+    one:string;
+    two:string;
+}
+
 const UsersDataList = () => {  
-    const [response, setResponse] = useState({'data':{"one":"first row", "two":"second row"}});
+    const [response, setResponse] = useState<AxiosResponse<UserResponse>|null>(null);
 
     const fetchUsers = async () => {
         // Fetch users from backend
@@ -13,7 +18,8 @@ const UsersDataList = () => {
                 },
             }));
         } catch (error) {
-            alert(`Impossible to fetch data: ${error.response ? error.response.data.detail : error.message}`);
+            const err = error as AxiosError<{detail:string}>
+            alert(`Impossible to fetch data: ${err.response ? err.response.data.detail : err.message}`);
         }
     }
     
@@ -23,7 +29,7 @@ const UsersDataList = () => {
             <h2>Users List</h2>
             <button onClick={fetchUsers}>Fetch</button>
             <div>
-                {JSON.stringify(response.data)}
+                {JSON.stringify(response?.data)}
             </div>
         </>
     );
