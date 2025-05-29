@@ -5,25 +5,37 @@ import DataFileInputFormulary from "./DataFileInputFormulary";
 import DataFilteringForm from "./DataFilteringForm";
 import DataChartContainer from "./DataChartContainer";
 
+
+// Define allowed types for a cell
+type Cell = string | number | boolean | null;
+
+// Recharts-compatible object for plotting
+interface ChartDataItem {
+    [key: string]: string | number;
+}
+
+// Types map: column name to type (includes values typing)
+type ColumnTypes = Record<string, "string" | "number" | "boolean">;
+
 const DataVisualizationView = () => {
-    const [headers, setHeaders] = useState([]);
-    const [types, setTypes] = useState({});
-    const [rows, setRows] = useState([]);
-    const [data, setData] = useState([]);
-    const [xKey, setXKey] = useState("X Label");
-    const [yKey, setYKey] = useState("Y Label");
+    const [headers, setHeaders] = useState<string[]>([]);
+    const [types, setTypes] = useState<ColumnTypes>({});
+    const [rows, setRows] = useState<Cell[][]>([]);
+    const [data, setData] = useState<ChartDataItem[]>([]);
+    const [xKey, setXKey] = useState<string>("X Label");
+    const [yKey, setYKey] = useState<string>("Y Label");
 
     // Callback to receive parsed file data
-    const handleParsedFile = (headers, rows, types) => {
+    const handleParsedFile = (headers:string[], rows:Cell[][], types:ColumnTypes) => {
         setHeaders(headers);
         setRows(rows);
         setTypes(types);
     };
 
-    const handleFilteredData = (data, xKey, yKey) => {
+    const handleFilteredData = (data:ChartDataItem[], xKey:string, yKey?:string) => {
         setData(data);
         setXKey(xKey);
-        setYKey(yKey)
+        if (yKey) setYKey(yKey);
     };
 
     return(
