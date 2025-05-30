@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeView from "../components/Application/HomeView";
 import AuthenticationView from "../components/Authentication/AuthenticationView";
 import PageNotFoundView from "../components/PageNotFoundView";
-import DataVisualizationView from "../components/DataVisualization/DataVisualizationView";
+import DataVisualizationView from "../components/DataVisualization/BaseView";
 import { AnimatePresence } from "framer-motion"; // Apply change between pages correctly
 
 const AppRoutes = () => {

@@ -1,9 +1,9 @@
 import {useState} from "react";
 import NavigationBar from "../Application/NavigationBar";
 import "../../styles/DataVisualization/DataVisualizationView.css";
-import DataFileInputFormulary from "./DataFileInputFormulary";
-import DataFilteringForm from "./DataFilteringForm";
-import DataChartContainer from "./DataChartContainer";
+import DataFileInputFormulary from "./FileInputForm";
+import DataFilteringForm from "./FilteringForm";
+import DataChartContainer from "./ChartContainer";
 
 
 // Define allowed types for a cell
