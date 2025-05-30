@@ -1,0 +1,10 @@
+Purpose	        |   Color Name     |Hex     |RGB
+Background	    |   Deep Navy	   |#1E1E2F	|rgb(30, 30, 47)
+Card/Surface    |	Gunmetal Gray  |#2B2C3D	|rgb(43, 44, 61)
+Text Primary	|   White	       |#FFFFFF	|rgb(255, 255, 255)
+Accent Primary	|   Sky Blue	   |#00C7E5	|rgb(0, 199, 229)
+Accent Secondary|	Violet Purple  |#8C54FF	|rgb(140, 84, 255)
+Chart Series 1	|   Aqua	       |#00D1B2	|rgb(0, 209, 178)
+Chart Series 2	|   Amber	       |#FFC94A	|rgb(255, 201, 74)
+Chart Series 3	|   Coral Pink	   |#FF6B6B	|rgb(255, 107, 107)
+Chart Series 4	|   Light Blue	   |#66D9EF	|rgb(102, 217, 239)

@@ -1,43 +1,43 @@
 .file-upload-container{
     border-radius: 10px;
     padding: 20px 20px;
-    background-color: rgb(30, 10, 90);
+    background-color: #2B2C3D;
     font-size: 1.2rem;
     margin: 20px 50px;
     width: 45%;
-    box-shadow: 2px 5px 10px rgb(218, 149, 149);
+    box-shadow: 2px 5px 10px #00C7E5;
 }
 .file-upload-container h3{
     text-align: center;
-    color: #e29b8e;
+    color: #00C7E5;
     font-weight: bold;
 }
 .file-upload-container p{
     font-weight: bold;
     font-size: 1rem;
+    color: #FFFFFF;
 }
 .dropzone {
     padding: 1.5rem;
-    border: 2px dashed #0077ff;
+    border: 2px dashed #00C7E5;
     border-radius: 8px;
+    background-color: #1E1E2F;
     text-align: center;
-    background-color: #e6f0ff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    color: #e29b8e;
+    color: #FFFFFF;
 }
 .dropzone:hover {
-    background-color: #d0e7ff;
-    color: #ff6961;
+    color: #00C7E5;
 }
 .clean-uploaded-file-button {
     position: relative;
     bottom: 70px;
     left: 530px;
-    background-color: #ff6961;
+    background-color: #FF6B6B;
     border: none;
     padding: 0.5rem 1rem;
-    color: white;
+    color: #FFFFFF;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
@@ -49,5 +49,5 @@
 
 #file-info {
     font-weight: bold;
-    color: green;
+    color: #00C7E5;
 }

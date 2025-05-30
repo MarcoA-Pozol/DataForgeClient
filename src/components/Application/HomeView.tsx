@@ -7,6 +7,7 @@ const HomeView = () => {
 		<PageTransition>
 			<NavigationBar/>
 			<h2>Welcome to DataForge!</h2>
+			<p>You can manage your data here!</p>
 		</PageTransition>
 	);
 }

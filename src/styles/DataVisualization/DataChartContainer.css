@@ -1,12 +1,12 @@
 .chart-block{
-    background-color: rgb(255, 223, 223);
-    color: rgb(0, 255, 55);
+    background-color: #2B2C3D;
+    color: #FFFFFF;
     border-radius: 5px;
     padding: 10px;
     position: relative;
     bottom: 300px;
     left: 50px;
-    border: 2px dotted purple;
+    border: 2px dotted #00C7E5;
     font-weight: bold;
     font-size: 2rem;
 }
