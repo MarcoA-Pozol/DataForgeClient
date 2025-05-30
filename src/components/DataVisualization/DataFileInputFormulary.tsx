@@ -93,15 +93,17 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 {uploadedFile ? (
-                    <p id="file-info">✅ File selected: <strong>{uploadedFile.name}</strong></p>
+                    <div>
+                        <p id="file-info">✅ File selected: <strong>{uploadedFile.name}</strong></p>
+                        <button className="clean-uploaded-file-button" onClick={cleanUploadedFile}>Clean</button>
+                    </div>
                 ) : (
-                    <p>🗂️ Drag and drop a file here, or click to select one</p>
+                    <div>
+                        <p>🗂️ Drag and drop a file here, or click to select one</p>
+                        <button className="clean-uploaded-file-button hided" onClick={cleanUploadedFile}>Clean</button>
+                    </div>
                 )}
             </div>
-            
-            {/* Clean selected file */}
-            {uploadedFile ? (<button className="clean-uploaded-file-button" onClick={cleanUploadedFile}>Clean</button>)
-            : (<button className="clean-uploaded-file-button hided" onClick={cleanUploadedFile}>Clean</button>)}
         </div>
     );
 }
