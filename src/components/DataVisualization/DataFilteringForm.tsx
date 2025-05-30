@@ -106,7 +106,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}:DataFilteringF
                         </select>
                     </label>
 
-                    <label>Select a visualization mode:
+                    <label>Aggregation func:
                         <select onChange={handleVisualizationMode} disabled={!column || selectedVisualizationOptions.length === 0}> {/* Prevent user from selecting a visualization mode before a column is selected */}
                             <option value="">-- Select --</option>
                             {selectedVisualizationOptions.map((visualizationOption, i) => (
@@ -117,7 +117,7 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}:DataFilteringF
                     <p>Total Rows: {rows.length}</p>
                 </div>
             ) : (
-                <p>📂 Upload a file to begin filtering.</p>
+                <p>📂 Upload a file to filter data.</p>
             )}
         </div>
     );

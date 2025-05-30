@@ -4,6 +4,7 @@
     font-size: 1.0rem;
     width: 30vw;
     box-shadow: 2px 5px 10px #00C7E5;
+    border: 2px solid #00C7E5;
     padding-block: 5px;
     padding-inline: 10px;
 }
