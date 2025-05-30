@@ -8,14 +8,17 @@ type DataChartContainerProps = {
 }
 
 const DataChartContainer = ({data, xKey, yKey}:DataChartContainerProps) => {
+  const width:number = window.innerWidth;
+  const height:number = window.innerHeight;
+
   return(
-    <BarChart className="chart-block" width={1235} height={500} style={{marginTop:20}} data={data}>
+    <BarChart className="chart-block" width={width*.6} height={height*.7} style={{marginLeft:20}} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey={xKey} angle={-45} textAnchor="end" height={60} style={{fontSize:16}}/>
+      <XAxis dataKey={xKey} angle={-45} textAnchor="end" height={60} style={{fontSize:12}}/>
       <YAxis dataKey={yKey}/>
       <Tooltip />
       <Legend />
-      <Bar dataKey="total" name={xKey} fill="rgb(100, 40, 200)"/>
+      <Bar dataKey="total" name={xKey} fill="#FFFFFF"/>
     </BarChart>
   );
 }

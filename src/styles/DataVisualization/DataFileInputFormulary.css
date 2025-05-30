@@ -1,11 +1,11 @@
 .file-upload-container{
     border-radius: 10px;
-    padding: 20px 20px;
     background-color: #2B2C3D;
-    font-size: 1.2rem;
-    margin: 20px 50px;
-    width: 45%;
+    font-size: 1.0rem;
+    width: 30vw;
     box-shadow: 2px 5px 10px #00C7E5;
+    padding-block: 5px;
+    padding-inline: 10px;
 }
 .file-upload-container h3{
     text-align: center;
@@ -14,7 +14,7 @@
 }
 .file-upload-container p{
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #FFFFFF;
 }
 .dropzone {
@@ -32,8 +32,6 @@
 }
 .clean-uploaded-file-button {
     position: relative;
-    bottom: 70px;
-    left: 530px;
     background-color: #FF6B6B;
     border: none;
     padding: 0.5rem 1rem;

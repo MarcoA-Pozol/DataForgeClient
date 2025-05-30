@@ -3,10 +3,8 @@
     color: #FFFFFF;
     border-radius: 5px;
     padding: 10px;
-    position: relative;
-    bottom: 300px;
-    left: 50px;
     border: 2px dotted #00C7E5;
     font-weight: bold;
     font-size: 2rem;
+    height: 50px;
 }

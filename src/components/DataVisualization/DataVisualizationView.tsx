@@ -41,9 +41,14 @@ const DataVisualizationView = () => {
     return(
         <div>
             <NavigationBar/>
-            <DataFileInputFormulary onParsedFile={handleParsedFile}/>
-            <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
-            <DataChartContainer data={data} xKey={xKey} yKey={yKey}/>
+            <br></br>
+            <div style={{display:"inline-flex", width:"100vw", alignItems:"center"}}>
+                <div>
+                    <DataFileInputFormulary onParsedFile={handleParsedFile}/>
+                    <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
+                </div>
+                <DataChartContainer data={data} xKey={xKey} yKey={yKey}/>
+            </div>
         </div>
     );
 }
