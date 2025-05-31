@@ -19,8 +19,6 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
         const file = acceptedFiles[0];
         if (file) {
             setUploadedFile(file);
-            localStorage.setItem("UploadedFileInDataVisualization", file.name);
-            localStorage.setItem("IsFileUploadedInDataVisualization", "true");
 
 
             const reader = new FileReader();
@@ -80,8 +78,6 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
 
     const cleanUploadedFile = () => {
         setUploadedFile(null);
-        localStorage.removeItem("IsFileUploadedInDataVisualization");
-        localStorage.removeItem("UploadedFileInDataVizualization");
     };
 
     return(
