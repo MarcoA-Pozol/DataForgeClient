@@ -8,11 +8,17 @@ type CellValue = string | number | boolean | null;
 type Row = CellValue[];
 interface FileInputFormProps {
     onParsedFile: (headers: string[], rows: Row[], types: Record<string, 'string' | 'number' | 'boolean'>) => void;
+	onCleanedFile: void;
 }  
 
 // Component
-const FileInputForm = ({onParsedFile}:FileInputFormProps) => {
+const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
    const [uploadedFile, setUploadedFile] = useState<FileWithPath |null>(null);
+	
+	// Clean file function
+	const onClean = useCallback(() => {
+		onCleanedFile();
+	}, [onCleanedFile])
 
     // Drop files function
     const onDrop = useCallback((acceptedFiles:FileWithPath[]) => {
@@ -76,11 +82,6 @@ const FileInputForm = ({onParsedFile}:FileInputFormProps) => {
         },
         multiple: false
     });
-	
-	// Clean uploaded file 
-    const cleanUploadedFile = () => {
-        setUploadedFile(null);
-    };
 
     return(
         <div className="file-upload-container">
@@ -98,7 +99,7 @@ const FileInputForm = ({onParsedFile}:FileInputFormProps) => {
                 ) : (
                     <div>
                         <p>🗂️ Drag and drop a file here, or click to select one</p>
-                        <button className="clean-uploaded-file-button hided" onClick={cleanUploadedFile}>Clean</button>
+                        <button className="clean-uploaded-file-button hided" onClick={onClean}>Clean</button>
                     </div>
                 )}
             </div>
