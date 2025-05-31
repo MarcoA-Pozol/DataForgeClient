@@ -1,13 +1,13 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 import "../../styles/DataVisualization/DataChartContainer.css";
 
-type DataChartContainerProps = {
+type ChartContainerProps = {
   data:any[];
   xKey:string;
   yKey:string;
 }
 
-const DataChartContainer = ({data, xKey, yKey}:DataChartContainerProps) => {
+const ChartContainer = ({data, xKey, yKey}:ChartContainerProps) => {
   const width:number = window.innerWidth;
   const height:number = window.innerHeight;
 
@@ -27,4 +27,4 @@ const DataChartContainer = ({data, xKey, yKey}:DataChartContainerProps) => {
   );
 }
 
-export default DataChartContainer;
+export default ChartContainer;

@@ -3,14 +3,15 @@ import { FileWithPath, useDropzone } from "react-dropzone";
 import * as XLSX from "xlsx";
 import "../../styles/DataVisualization/DataFileInputFormulary.css";
 
+// Types and interfaces
 type CellValue = string | number | boolean | null;
 type Row = CellValue[];
-
-interface DataFileInputFormularyProps {
+interface FileInputFormProps {
     onParsedFile: (headers: string[], rows: Row[], types: Record<string, 'string' | 'number' | 'boolean'>) => void;
 }  
 
-const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
+// Component
+const FileInputForm = ({onParsedFile}:FileInputFormProps) => {
    const [uploadedFile, setUploadedFile] = useState<FileWithPath |null>(null);
 
     // Drop files function
@@ -75,7 +76,8 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
         },
         multiple: false
     });
-
+	
+	// Clean uploaded file 
     const cleanUploadedFile = () => {
         setUploadedFile(null);
     };
@@ -104,4 +106,4 @@ const DataFileInputFormulary = ({onParsedFile}:DataFileInputFormularyProps) => {
     );
 }
 
-export default DataFileInputFormulary;
+export default FileInputForm;

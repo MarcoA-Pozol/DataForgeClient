@@ -10,9 +10,9 @@
 import {useState} from "react";
 import NavigationBar from "../Application/NavigationBar";
 import "../../styles/DataVisualization/DataVisualizationView.css";
-import DataFileInputFormulary from "./FileInputForm";
-import DataFilteringForm from "./FilteringForm";
-import DataChartContainer from "./ChartContainer";
+import FileInputForm from "./FileInputForm";
+import FilteringForm from "./FilteringForm";
+import ChartContainer from "./ChartContainer";
 
 
 // Define allowed types for a cell
@@ -26,7 +26,7 @@ interface ChartDataItem {
 // Types map: column name to type (includes values typing)
 type ColumnTypes = Record<string, "string" | "number" | "boolean">;
 
-const DataVisualizationView = () => {
+const BaseView = () => {
     // States to manage raw uploaded file
     const [headers, setHeaders] = useState<string[]>([]);
     const [rows, setRows] = useState<Cell[][]>([]);
@@ -37,7 +37,7 @@ const DataVisualizationView = () => {
     const [xKey, setXKey] = useState<string>("X Label");
     const [yKey, setYKey] = useState<string>("Y Label");
 
-    // Callback: Called after file is parsed by FileInputFormulary
+    // Callback: After file upload
     const handleParsedFile = (headers:string[], rows:Cell[][], types:ColumnTypes) => {
         /*
             Used as callback function is sent to FileInputForm to set headers, rows and types after file upload.
@@ -52,6 +52,20 @@ const DataVisualizationView = () => {
         setRows(rows);
         setTypes(types);
     };
+	
+	// Callback: After file clean
+	const handleCleanedFile = () => {
+		/*
+			Set headers, rows and types to empty lists or objects after cleaning a file on FileInput formulary.
+			Cleaned data is reflected on the next componets like ChartContainer and FilteringForm as no values provided because of not loaded file.
+			
+			Args:
+			- none
+		*/
+		setHeaders([]);
+		setRows([]);
+		setTypes({});
+	}:
 
     // Callback to receive filtered data
     const handleFilteredData = (data:ChartDataItem[], xKey:string, yKey?:string) => {
@@ -66,13 +80,13 @@ const DataVisualizationView = () => {
             <br></br>
             <div style={{display:"inline-flex", width:"100vw", alignItems:"center"}}>
                 <div>
-                    <DataFileInputFormulary onParsedFile={handleParsedFile}/>
-                    <DataFilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
+                    <FileInputForm onParsedFile={handleParsedFile} onCleanedFile={handleCleanedFile}/>
+                    <FilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
                 </div>
-                <DataChartContainer data={data} xKey={xKey} yKey={yKey}/>
+                <ChartContainer data={data} xKey={xKey} yKey={yKey}/>
             </div>
         </div>
     );
 }
 
-export default DataVisualizationView;
+export default BaseView;

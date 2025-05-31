@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import "../../styles/DataVisualization/DataFilteringForm.css";
 
-interface DataFilteringFormProps {
+interface FilteringFormProps {
     onFilteredData: (filteredData: any[], xKey: string, yKey?: string) => void;
     headers: string[];
     rows: any[][];
@@ -10,7 +10,7 @@ interface DataFilteringFormProps {
 
 type VisualizationOption = "Count" | "Value per Index";
 
-const DataFilteringForm = ({onFilteredData, headers, rows, types}:DataFilteringFormProps) =>{
+const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState<VisualizationOption[]>([]);
     const [column, setColumn] = useState("");
 
@@ -123,4 +123,4 @@ const DataFilteringForm = ({onFilteredData, headers, rows, types}:DataFilteringF
     );
 }
 
-export default DataFilteringForm;
+export default FilteringForm;
