@@ -65,7 +65,10 @@ const BaseView = () => {
 		setHeaders([]);
 		setRows([]);
 		setTypes({});
-	}:
+        setData([]);
+        setXKey("X Label");
+        setYKey("Y Label");
+	};
 
     // Callback to receive filtered data
     const handleFilteredData = (data:ChartDataItem[], xKey:string, yKey?:string) => {

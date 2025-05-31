@@ -8,7 +8,7 @@ type CellValue = string | number | boolean | null;
 type Row = CellValue[];
 interface FileInputFormProps {
     onParsedFile: (headers: string[], rows: Row[], types: Record<string, 'string' | 'number' | 'boolean'>) => void;
-	onCleanedFile: void;
+	onCleanedFile: () => void;
 }  
 
 // Component
@@ -17,7 +17,8 @@ const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
 	
 	// Clean file function
 	const onClean = useCallback(() => {
-		onCleanedFile();
+        setUploadedFile(null);
+        onCleanedFile();
 	}, [onCleanedFile])
 
     // Drop files function
@@ -94,7 +95,7 @@ const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
                 {uploadedFile ? (
                     <div>
                         <p id="file-info">✅ File selected: <strong>{uploadedFile.name}</strong></p>
-                        <button className="clean-uploaded-file-button" onClick={cleanUploadedFile}>Clean</button>
+                        <button className="clean-uploaded-file-button" onClick={(e) => {e.stopPropagation();onClean();}}>Clean</button>
                     </div>
                 ) : (
                     <div>
