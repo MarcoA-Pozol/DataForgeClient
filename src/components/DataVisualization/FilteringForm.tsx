@@ -8,7 +8,7 @@ interface FilteringFormProps {
     yTypes: Record<number, "number">;
 }
 
-type VisualizationOption = "Count" | "Value per Index";
+type VisualizationOption = "Count" | "Value per Index" | "Sum" | "Avg" | "Max" | "Min";
 
 const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:FilteringFormProps) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState<VisualizationOption[]>([]);
@@ -54,8 +54,47 @@ const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:Filtering
             const xKey = column;   // X-axis = identifier
             const yKey = "value";   // Y-axis = numeric value
             onFilteredData(data, xKey, yKey);
+        } else if (["Sum", "Avg", "Min", "Max"].includes(selectedVisualizationMode)) {
+            const groupByKey = column;
+            const groupByIndex = headers.indexOf(groupByKey);
+            const yKeyIndex = headers.indexOf(yIndex);
+        
+            const groupedValues: Record<string, number[]> = {};
+        
+            // Group values
+            rows.forEach(row => {
+                const key = row[groupByIndex];
+                const val = parseFloat(row[yKeyIndex]);
+        
+                if (!isNaN(val)) {
+                    if (!groupedValues[key]) groupedValues[key] = [];
+                    groupedValues[key].push(val);
+                }
+            });
+        
+            const data = Object.entries(groupedValues).map(([group, values]) => {
+                let aggregated = 0;
+        
+                switch (selectedVisualizationMode) {
+                    case "Sum":
+                        aggregated = values.reduce((sum, v) => sum + v, 0);
+                        break;
+                    case "Avg":
+                        aggregated = values.reduce((sum, v) => sum + v, 0) / values.length;
+                        break;
+                    case "Min":
+                        aggregated = Math.min(...values);
+                        break;
+                    case "Max":
+                        aggregated = Math.max(...values);
+                        break;
+                }
+        
+                return { item: group, total: aggregated };
+            });
+        
+            onFilteredData(data, column, "total");
         }
-
     };
 
     const handleXIndexChange = ((e:React.ChangeEvent<HTMLSelectElement>) => {
@@ -75,9 +114,11 @@ const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:Filtering
             if (normalized !== "true" && normalized !== "false") isBoolean = false;
         }
     
-        if (isBoolean) {
-            xTypes[column] = "boolean";
+        if (isBoolean || xTypes[column] === "string") {
+            const visualizationOptions: VisualizationOption[] = ["Count", "Value per Index"];
             setSelectedVisualizationOptions(["Count", "Value per Index"]);
+            if (yIndex) visualizationOptions.push("Sum", "Avg", "Max", "Min");
+            setSelectedVisualizationOptions(visualizationOptions);
         } 
         else {
             xTypes[column] = "string";
