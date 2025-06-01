@@ -1,22 +1,24 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import "../../styles/DataVisualization/DataFilteringForm.css";
-
 interface FilteringFormProps {
     onFilteredData: (filteredData: any[], xKey: string, yKey?: string) => void;
     headers: string[];
     rows: any[][];
-    types: Record<string, "string" | "number" | "boolean">;
+    xTypes: Record<string, "string" | "boolean">;
+    yTypes: Record<number, "number">;
 }
 
 type VisualizationOption = "Count" | "Value per Index";
 
-const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps) =>{
+const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:FilteringFormProps) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState<VisualizationOption[]>([]);
     const [column, setColumn] = useState("");
 
-    const handleVisualizationMode = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleVisualizationMode = (e: React.ChangeEvent<HTMLSelectElement>) => {
         // Get choosen visualization mode
         const selectedVisualizationMode = e.target.value;
+
+        if (!column) return;
 
         // Validate selected mode
         if (selectedVisualizationMode === "Count") {
@@ -29,36 +31,33 @@ const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps
                 }
             });
             // Get selected data key (column)
-            const dataKey = column;
+            const xKey = column;
             // Format for Recharts (Final data state ready to be plotted on the chart)
-            const formatted = Object.entries(counts).map(([item, total]) => ({ item, total }));
-            console.log(`Formated:${formatted}`)
-            onFilteredData(formatted, dataKey);
+            const data = Object.entries(counts).map(([item, total]) => ({ item, total }));
+            console.log(`Formated:${data}`)
+            onFilteredData(data, xKey);
         } else if (selectedVisualizationMode === "Value per Index") {
-            const comparative_index = "Airline"; // this could be dynamic later
-
+            // Assume the xLabel is some identifier (use row index if no 'ID' or 'Airline' exists)
             const colIndex = headers.indexOf(column);
-            const compIndex = headers.indexOf(comparative_index);
+            const idColumn = headers.includes("ID") ? "ID" : headers.includes("Airline") ? "Airline" : null;
 
-            if (colIndex === -1 || compIndex === -1) return; // Do not filter until column and comparative index are selected
-
-            const formatted = rows.map((row) => {
-                const xLabel = row[compIndex];
+            const data = rows.map((row, i) => {
+                const xLabel = idColumn ? row[headers.indexOf(idColumn)] : `Row ${i + 1}`;
                 const yValue = row[colIndex];
                 return {
-                    [comparative_index]: xLabel,
-                    [column]: isNaN(yValue) ? yValue : Number(yValue),
+                    label: xLabel,
+                    value: isNaN(yValue) ? yValue : Number(yValue),
                 };
             });
 
-            const xKey = column; 
-            const yKey = comparative_index;
-            onFilteredData(formatted, xKey, yKey);
+            const xKey = column;   // X-axis = identifier
+            const yKey = "value";   // Y-axis = numeric value
+            onFilteredData(data, xKey, yKey);
         }
 
-    }, [onFilteredData, column, rows, headers]);
+    };
 
-    const handleColumnChanges = ((e:React.ChangeEvent<HTMLSelectElement>) => {
+    const handleXIndexChange = ((e:React.ChangeEvent<HTMLSelectElement>) => {
         // Obtain column throught the formulary selected option
         let isNumber = true;
         let isBoolean = true;
@@ -78,15 +77,17 @@ const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps
         }
     
         if (isBoolean) {
-            types[column] = "boolean";
+            xTypes[column] = "boolean";
             setSelectedVisualizationOptions(["Count", "Value per Index"]);
-        } else if (isNumber) {
-            types[column] = "number";
-            setSelectedVisualizationOptions(["Count", "Value per Index"]);
-        } else {
-            types[column] = "string";
+        } 
+        else {
+            xTypes[column] = "string";
             setSelectedVisualizationOptions(["Count"]);
         }
+    });
+
+    const handleYIndexChange = ((e:React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value);
     });
 
     return(
@@ -95,10 +96,21 @@ const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps
 
             {headers.length > 0 ? (
                 <div>
-                    <label>Select a column:
-                        <select onChange={handleColumnChanges}>
+                    <label>X Index:
+                        <select onChange={handleXIndexChange}>
                             <option value="">-- Select --</option>
-                            {Object.entries(types).map(([column, type]) => (
+                            {Object.entries(xTypes).map(([column, type]) => (
+                                <option key={column} value={column}>
+                                    {column} ({type})
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label>Y Index:
+                        <select onChange={handleYIndexChange}>
+                            <option value="">-- Select --</option>
+                            {Object.entries(yTypes).map(([column, type]) => (
                                 <option key={column} value={column}>
                                     {column} ({type})
                                 </option>
@@ -114,6 +126,7 @@ const FilteringForm = ({onFilteredData, headers, rows, types}:FilteringFormProps
                             ))}
                         </select>
                     </label>
+
                     <p>Total Rows: {rows.length}</p>
                 </div>
             ) : (

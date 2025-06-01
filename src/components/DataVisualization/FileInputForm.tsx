@@ -7,7 +7,7 @@ import "../../styles/DataVisualization/DataFileInputFormulary.css";
 type CellValue = string | number | boolean | null;
 type Row = CellValue[];
 interface FileInputFormProps {
-    onParsedFile: (headers: string[], rows: Row[], types: Record<string, 'string' | 'number' | 'boolean'>) => void;
+    onParsedFile: (headers: string[], rows: Row[], XTypes: Record<string, 'string' | 'boolean'>, yTypes: Record<string, "number">) => void;
 	onCleanedFile: () => void;
 }  
 
@@ -42,9 +42,12 @@ const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
                 const rows = jsonData.slice(1); // Get rows from vertical axis (up->down)
 
                 // Obtain types of columns (to let the user to choose the visualization mode: count, compare values in case of numeric rows)
-                const types:Record<string, "string" | "number" | "boolean"> = {};
+                const xTypes:Record<string, "string" | "boolean"> = {};
 
-                headers.forEach((header:string, index:any) => {
+                // Obtain Y indexes
+                const yTypes:Record<string, "number"> = {};
+
+                headers.forEach((header:string, index:number) => {
                     const columnValues = rows.map(row => row[index]);
 
                     let isNumber = true;
@@ -59,16 +62,16 @@ const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
                     }
 
                     if (isBoolean) {
-                        types[header] = "boolean";
+                        xTypes[header] = "boolean";
                     } else if (isNumber) {
-                        types[header] = "number";
+                        yTypes[header] = "number";
                     } else {
-                        types[header] = "string";
+                        xTypes[header] = "string";
                     }
                 });
 
                 // Send parsed data to parent
-                onParsedFile(headers, rows, types);
+                onParsedFile(headers, rows, xTypes, yTypes);
             };
             reader.readAsArrayBuffer(file);
         }

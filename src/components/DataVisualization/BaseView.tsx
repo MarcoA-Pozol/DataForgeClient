@@ -24,13 +24,15 @@ interface ChartDataItem {
 }
 
 // Types map: column name to type (includes values typing)
-type ColumnTypes = Record<string, "string" | "number" | "boolean">;
+type XColumnTypes = Record<string, "string" | "boolean">;
+type YColumnTypes = Record<number, "number">;
 
 const BaseView = () => {
     // States to manage raw uploaded file
     const [headers, setHeaders] = useState<string[]>([]);
     const [rows, setRows] = useState<Cell[][]>([]);
-    const [types, setTypes] = useState<ColumnTypes>({});
+    const [xTypes, setXTypes] = useState<XColumnTypes>({});
+    const [yTypes, setYTypes] = useState<YColumnTypes>({});
 
     // States for filtered/visualized data
     const [data, setData] = useState<ChartDataItem[]>([]);
@@ -38,7 +40,7 @@ const BaseView = () => {
     const [yKey, setYKey] = useState<string>("Y Label");
 
     // Callback: After file upload
-    const handleParsedFile = (headers:string[], rows:Cell[][], types:ColumnTypes) => {
+    const handleParsedFile = (headers:string[], rows:Cell[][], xTypes:XColumnTypes, yTypes:YColumnTypes) => {
         /*
             Used as callback function is sent to FileInputForm to set headers, rows and types after file upload.
             Setted values are reflected in BaseView component to be used in data filtering stage.
@@ -46,11 +48,13 @@ const BaseView = () => {
             Args:
             - headers (string[]): Column names obtained from parsed file, like id, name, createdAt, country, gender, etc.
             - rows (Cell[][]): Rows of data matching headers (1, Petter, 19-06-2025, USA, Male).
-            - types (ColumnTypes) : Column/headers values' types like string, number and boolean.
+            - xTypes (XColumnTypes) : Column/headers values types for xIndex like string and boolean.
+            - yTypes (YColumnTypes) : Values types for yIndex like number.
         */ 
         setHeaders(headers);
         setRows(rows);
-        setTypes(types);
+        setXTypes(xTypes);
+        setYTypes(yTypes);
     };
 	
 	// Callback: After file clean
@@ -64,7 +68,8 @@ const BaseView = () => {
 		*/
 		setHeaders([]);
 		setRows([]);
-		setTypes({});
+		setXTypes({});
+        setXTypes
         setData([]);
         setXKey("X Label");
         setYKey("Y Label");
@@ -84,7 +89,7 @@ const BaseView = () => {
             <div style={{display:"inline-flex", width:"100vw", alignItems:"center"}}>
                 <div>
                     <FileInputForm onParsedFile={handleParsedFile} onCleanedFile={handleCleanedFile}/>
-                    <FilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} types={types}/>
+                    <FilteringForm onFilteredData={handleFilteredData} headers={headers} rows={rows} xTypes={xTypes} yTypes={yTypes}/>
                 </div>
                 <ChartContainer data={data} xKey={xKey} yKey={yKey}/>
             </div>
