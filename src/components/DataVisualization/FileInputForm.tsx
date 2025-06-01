@@ -43,8 +43,6 @@ const FileInputForm = ({onParsedFile, onCleanedFile}:FileInputFormProps) => {
 
                 // Obtain types of columns (to let the user to choose the visualization mode: count, compare values in case of numeric rows)
                 const xTypes:Record<string, "string" | "boolean"> = {};
-
-                // Obtain Y indexes
                 const yTypes:Record<string, "number"> = {};
 
                 headers.forEach((header:string, index:number) => {

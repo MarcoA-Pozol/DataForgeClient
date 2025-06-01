@@ -59,7 +59,6 @@ const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:Filtering
 
     const handleXIndexChange = ((e:React.ChangeEvent<HTMLSelectElement>) => {
         // Obtain column throught the formulary selected option
-        let isNumber = true;
         let isBoolean = true;
         const selectedColumn = e.target.value;
         setColumn(selectedColumn);
@@ -72,7 +71,6 @@ const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:Filtering
         for (let val of columnValues) {
             const normalized = val?.toString().trim().toLowerCase();
     
-            if (isNaN(Number(val))) isNumber = false;
             if (normalized !== "true" && normalized !== "false") isBoolean = false;
         }
     
