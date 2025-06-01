@@ -12,13 +12,14 @@ type VisualizationOption = "Count" | "Value per Index";
 
 const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:FilteringFormProps) =>{
     const [selectedVisualizationOptions, setSelectedVisualizationOptions] = useState<VisualizationOption[]>([]);
-    const [column, setColumn] = useState("");
+    const [column, setColumn] = useState<string>("");
+    const [yIndex, setYIndex] = useState<string>("");
 
     const handleVisualizationMode = (e: React.ChangeEvent<HTMLSelectElement>) => {
         // Get choosen visualization mode
         const selectedVisualizationMode = e.target.value;
 
-        if (!column) return;
+        if (!column || !yIndex) return;
 
         // Validate selected mode
         if (selectedVisualizationMode === "Count") {
@@ -85,7 +86,8 @@ const FilteringForm = ({onFilteredData, headers, rows, xTypes, yTypes}:Filtering
     });
 
     const handleYIndexChange = ((e:React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value);
+        const selectedYIndex = e.target.value;
+        setYIndex(selectedYIndex);
     });
 
     return(
